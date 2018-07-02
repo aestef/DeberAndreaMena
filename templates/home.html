@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ADMINISTRACION ACADEMICA -UTPL</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    
+  </head>
+  <body>
+    
+    <div class="full-height text-center">
+      <div class="">
+  
+        <h1 style="background-color:hsl(39, 100%, 50%);">Universidad Técnica Particular Loja</h1>
+        <h3>Base de Datos Avanzada</h3>
+        <h5>Andrea Mena</h5>
+      </div>
+      
+    </div>
+    
+    <div class="col-md-6 center-block no-float top-space form-control">
+
+      <h2 style="background-color: #08298A; color:white;">Datos del Estudiante</h2>
+
+      <form class="form-inline" method="POST" action="/">
+        <div class="form-group mb-2">
+          <input type="text" class="form-control"  name="name" placeholder="Nombres" required>
+        </div>
+        <br>
+        <br>
+        <div class="form-group mx-sm-3 mb-2">
+          <input type="text" class="form-control" name="lastname" placeholder="Apellidos" required>
+        </div>
+        <input type="submit" class="btn btn-primary mb-2" value="Insertar">
+      </form>
+    </div>
+    
+
+    
+  <div id="table">
+    <h2 style="background-color: #08298A; color:white;">Directorio de Estudiantes</h2>
+    <table class="table table-striped">
+      <thead class="thead-light">
+          <tr class="info">
+              <th scope="col">ID</th>
+              <th scope="col">Nombres</th>
+              <th scope="col">Apellidos</th>
+              <th scope="col">Datos</th>
+          </tr>
+      </thead>
+      {% for student in estudiantes %}
+        <tbody>
+          <tr>
+            <td id="fila">
+              <p>{{student.idStudent}}</p>
+            </td>
+
+            <td id="fila">
+              <p>{{student.nombreStudent}}</p>
+            </td>
+
+            <td id="fila">
+              <p>{{student.apellidoStudent}}</p>
+            </td>
+
+            <td id="td2" class="btn-group">
+              <div>
+              <form method="POST" action="./update">
+                <input type="hidden" value="{{student.idStudent}}" name="idestudent">
+                <div class="form-group mx-sm-3 mb-2">
+                    <input type="text" class="form-control"  value="{{student.nombreStudent}}" name="newname" placeholder="Nombres" required>
+                </div>
+                <div class="form-group mx-sm-3 mb-2">
+                    <input type="text" class="form-control" value="{{student.apellidoStudent}}" name="newlastname" placeholder="Apellidos" required>
+                </div>
+                <input type="submit" value="Actulizar" class="btn btn-primary">
+              </form>
+              </div>
+              <div>
+              <form method="POST" action="./delete" >
+                <input type="hidden" value="{{student.idStudent}}" name="idestudent">
+                <input type="submit" value="Suprimir" class="btn btn-warning">
+              </form>
+            </div>
+            </td>
+          </tr>
+        </tbody>
+      {% endfor %}
+
+    </table>
+  </div>
+  </body>
+</html>
